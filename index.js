@@ -1,13 +1,14 @@
 
-/** *********************************************************
- *  A simple container
- ** *********************************************************/
-
 const is = require('is_js');
 
+
+/**
+ * @class Container
+ */
 class Container {
+
   /**
-   * @param {Object} data [intialize with this data]
+   * @param {Object} data - intialize with this data
    */
   constructor(data) {
     this.data = Object.assign({}, data);
@@ -17,12 +18,15 @@ class Container {
 
   /**
    * It won't rewrite if the key already exists, use update
-   * @param  {String} key [name of the key]
-   * @param  {Mixed} value [Anything]
+   *
+   * @param {string} key - name of the key
+   * @param {*} value - anything
+   *
+   * @throws {TypeError} when property is already present
    */
   add(key, value) {
     if (is.not.undefined(this.data[key])) {
-      throw new Error(`Won't add <${key}>, already existing`);
+      throw new TypeError(`Won't add <${key}>, already existing`);
     }
     Object.assign(this.data, {
       [key]: value,
@@ -32,14 +36,17 @@ class Container {
 
   /**
    * Get value at key property
-   * @param  {String} key [property to get]
-   * @param  {Boolean} silent [whether to throw error if property not defined]
-   * @return {Mixed} [whatever stored at the key property]
+   *
+   * @param {string} key - property to get
+   * @param {boolean} silent - whether to throw error if property not defined
+   *
+   * @return {*} whatever stored at the key property
+   * @throws {ReferenceError} when the silent flag is false and the property is not found
    */
   get(key, silent = false) {
     const value = this.data[key];
     if (silent === false && is.undefined(value)) {
-      throw new Error(`No key <${key}> found`);
+      throw new ReferenceError(`No key <${key}> found`);
     }
     return value;
   }
@@ -47,19 +54,20 @@ class Container {
 
   /**
    * Will not check if property already exist, will add or set it anyway
-   * @param  {String} key [name of the key]
-   * @param  {Mixed} value [Anything]
+   *
+   * @param {string} key - name of the key
+   * @param {*} value - anything
    */
   set(key, value) {
-    this.data = Object.assign(this.data, {
+    Object.assign(this.data, {
       [key]: value,
     });
   }
 
   /**
    * Unpack, just expose the data object, so that we can use desctructing
-   * @return  {Object} [the whole data]
-   * 
+   *
+   * @return {Object} the whole data
    */
   unpack() {
     return this.data;

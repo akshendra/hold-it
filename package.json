@@ -1,12 +1,13 @@
 {
   "name": "hold-it",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple singleton container",
   "main": "index.js",
   "repository": "git@github.com:akshendra/hold-it.git",
   "author": "Akshendra Pratap Singh",
   "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
